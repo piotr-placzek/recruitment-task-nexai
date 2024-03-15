@@ -1,0 +1,59 @@
+version: "3.7"
+
+services:
+  api:
+    container_name: nexai-rt-api
+    restart: always
+    build:
+      context: ./api
+      dockerfile: docker/Dockerfile.dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api/src:/app/src
+      - ./logs:/app/logs
+    depends_on:
+      - db
+
+  app:
+    container_name: nexai-rt-app
+    build:
+      context: ./app
+      dockerfile: docker/Dockerfile.dev
+    ports:
+      - 4200:4200
+    volumes:
+      - ./app/src:/opt/app/src
+
+  db:
+    container_name: nexai-rt-mysql
+    restart: always
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - '3306:3306'
+    volumes:
+      - mssql-data:/var/lib/mysql
+  
+  adminer:
+    container_name: nexai-rt-adminer
+    restart: always
+    image: adminer
+    ports:
+      - 8080:8080
+
+  proxy:
+    container_name: nexai-rt-proxy
+    restart: always
+    build:
+      context: ./proxy
+    ports:
+      - 3001:80
+
+volumes:
+  mssql-data:
