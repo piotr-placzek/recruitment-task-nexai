@@ -7,6 +7,6 @@ export class TestService {
   constructor(private readonly http: HttpClient) {}
 
   healtz() {
-    return lastValueFrom(this.http.get('/api'));
+    return lastValueFrom(this.http.get('/api/health'));
   }
 }
