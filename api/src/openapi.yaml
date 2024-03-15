@@ -1,0 +1,22 @@
+openapi: 3.0.0
+info:
+  title: Rent Car NEXAI RT
+  description: API for NEXAI's recruitment task
+  version: 0.1.9
+
+servers:
+  - url: http://localhost:3001/api
+    description: docker-compose
+
+paths:
+  /health:
+    get:
+      summary: Returns OK if API is running
+      responses:
+        '200':
+          description: OK string
+          content: 
+            text/html:
+              schema:
+                type: string
+            
