@@ -11,9 +11,6 @@ export class CustomerEntity extends EntityBase {
   lastName: string;
 
   @Column()
-  companyName: string;
-
-  @Column()
   email: string;
 
   @Column({ type: 'json' })

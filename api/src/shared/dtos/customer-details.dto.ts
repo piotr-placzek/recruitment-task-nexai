@@ -1,13 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional } from 'class-validator';
 import { AddressDto } from './address.dto';
-import {
-  IsAlpha,
-  IsEmail,
-  IsInstance,
-  IsOptional,
-  IsString,
-  IsUUID,
-} from 'class-validator';
 
 export class CustomerDetailsDto {
   @ApiPropertyOptional({
@@ -21,9 +14,6 @@ export class CustomerDetailsDto {
 
   @ApiProperty()
   lastName: string;
-
-  @ApiProperty()
-  companyName: string;
 
   @ApiProperty({
     format: 'email',
