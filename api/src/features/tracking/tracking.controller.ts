@@ -11,7 +11,7 @@ import { GetCarPositionQuery } from './queries/get-car-position.query';
 export class TrackingController {
   constructor(private readonly queryBus: QueryBus) {}
 
-  @Get(':carId')
+  @Get()
   @ApiResponse({
     status: 200,
     description: 'Current address, where selected car is',

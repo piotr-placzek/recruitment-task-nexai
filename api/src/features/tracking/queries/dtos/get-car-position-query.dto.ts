@@ -3,6 +3,6 @@ import { IsUUID } from 'class-validator';
 
 export class GetCarPositionQueryDto {
   @ApiProperty()
-  @IsUUID()
+  // @IsUUID()
   id: string;
 }

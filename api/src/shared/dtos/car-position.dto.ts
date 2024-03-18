@@ -2,7 +2,10 @@ import { ApiProperty } from '@nestjs/swagger';
 import { AddressDto } from './address.dto';
 
 export class CarPositionDto {
-  @ApiProperty()
+  @ApiProperty({
+    type: 'string',
+    format: 'uuid'
+  })
   carId: string;
 
   @ApiProperty()

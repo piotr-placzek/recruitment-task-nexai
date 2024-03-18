@@ -10,7 +10,10 @@ import {
 } from 'class-validator';
 
 export class CustomerDetailsDto {
-  @ApiPropertyOptional()
+  @ApiPropertyOptional({
+    type: 'string',
+    format: 'uuid',
+  })
   @IsOptional()
   @IsUUID()
   id: string;
@@ -27,7 +30,10 @@ export class CustomerDetailsDto {
   @IsString()
   companyName: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    type: 'string',
+    format: 'email',
+  })
   @IsEmail()
   email: string;
 
