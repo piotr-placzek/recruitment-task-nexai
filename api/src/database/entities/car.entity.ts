@@ -1,7 +1,5 @@
 import { EntityBase } from 'src/database/entities/entity-base';
-import { CustomerEntity } from 'src/database/entities/customer.entity';
-import { TrackingPositionEntity } from 'src/database/entities/tracking-position.entity';
-import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
 @Entity('fleet')
 export class CarEntity extends EntityBase {
@@ -28,14 +26,6 @@ export class CarEntity extends EntityBase {
   })
   vin: string;
 
-  @Column({ default: false })
-  rented: boolean;
-
-  @OneToOne(() => CustomerEntity, { nullable: true })
-  @JoinColumn()
-  customer: CustomerEntity;
-
-  @OneToOne(() => TrackingPositionEntity)
-  @JoinColumn()
-  position: TrackingPositionEntity;
+  @Column({ nullable: true })
+  rentedBy: string | null;
 }

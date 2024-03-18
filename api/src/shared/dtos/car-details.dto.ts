@@ -1,14 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsAlphanumeric,
-  IsBooleanString,
-  IsInstance,
-  IsOptional,
-  IsString,
-  IsUUID,
-} from 'class-validator';
-import { CarPositionDto } from 'src/shared/dtos/car-position.dto';
-import { CustomerDetailsDto } from 'src/shared/dtos/customer-details.dto';
+import { IsAlphanumeric, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class PutCarDetailsDto {
   @ApiProperty({ format: 'uuid', required: false })
@@ -30,12 +21,9 @@ export class PutCarDetailsDto {
 }
 
 export class CarDetailsDto extends PutCarDetailsDto {
-  @ApiProperty()
-  rented: boolean;
+  @ApiProperty({ format: 'uuid' })
+  id: string;
 
-  @ApiProperty()
-  customer: CustomerDetailsDto;
-
-  @ApiProperty()
-  position: CarPositionDto;
+  @ApiProperty({ type: 'uuid' })
+  rentedBy: string;
 }

@@ -16,12 +16,10 @@ export class PutCarDetailsCommandHandler
   ) {}
 
   async execute(command: PutCarDetailsCommand): Promise<CarDetailsDto> {
-    const partialEntity = await this.fleetRepository.create({
+    const partialCarEntity = await this.fleetRepository.create({
       ...command,
     });
-
-    const entity = await this.fleetRepository.save(partialEntity);
-
-    return toCarDetailsDto(entity);
+    const carEntity = await this.fleetRepository.save(partialCarEntity);
+    return toCarDetailsDto(carEntity);
   }
 }

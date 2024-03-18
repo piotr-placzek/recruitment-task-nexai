@@ -1,13 +1,16 @@
 import { Body, Controller, Delete, Get, Put, Query } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { RemoveCarQueryDto } from 'src/shared/dtos/remove-car-query.dto';
 import { RequestValidationError } from 'src/shared/dtos/request-validation-error.dto';
+import {
+  CarDetailsDto,
+  PutCarDetailsDto,
+} from '../../shared/dtos/car-details.dto';
 import { PutCarDetailsCommand } from './commands/put-car-details.command';
 import { RemoveCarFromFleetCommand } from './commands/remove-car-from-fleet.command';
-import { CarDetailsDto, PutCarDetailsDto } from '../../shared/dtos/car-details.dto';
 import { GetListOfCarsManufacturersQuery } from './queries/get-list-of-cars-manufacturers.query';
 import { GetListOfCarsQuery } from './queries/get-list-of-cars.query';
-import { RemoveCarQueryDto } from 'src/shared/dtos/remove-car-query.dto';
 
 @Controller('fleet')
 @ApiTags('fleet')
@@ -43,7 +46,7 @@ export class FleetController {
 
   @Put()
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Add or edit car details, returns these details',
     type: CarDetailsDto,
   })
