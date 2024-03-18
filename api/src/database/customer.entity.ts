@@ -1,5 +1,5 @@
 import { EntityBase } from 'src/database/entity-base';
-import { Address } from 'src/shared/types';
+import { AddressDto } from 'src/shared/dtos/address.dto';
 import { Column, Entity } from 'typeorm';
 
 @Entity('customers')
@@ -17,5 +17,5 @@ export class CustomerEntity extends EntityBase {
   email: string;
 
   @Column({ type: 'json' })
-  address: Address;
+  address: AddressDto;
 }

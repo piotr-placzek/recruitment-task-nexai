@@ -1,14 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-
     TypeOrmModule.forRootAsync({
       useFactory: () => {
-        console.log(process.env);
         return {
           type: 'mysql',
           host: process.env.MYSQL_HOST,
@@ -21,6 +20,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         };
       },
     }),
+    CqrsModule,
   ],
+  exports: [CqrsModule],
 })
 export default class CoreModule {}
