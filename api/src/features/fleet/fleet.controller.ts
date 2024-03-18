@@ -4,10 +4,10 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RequestValidationError } from 'src/shared/dtos/request-validation-error.dto';
 import { PutCarDetailsCommand } from './commands/put-car-details.command';
 import { RemoveCarFromFleetCommand } from './commands/remove-car-from-fleet.command';
+import { CarDetailsDto } from './queries/dtos/car-details.dto';
 import { GetListOfCarsManufacturersQuery } from './queries/get-list-of-cars-manufacturers.query';
 import { GetListOfCarsQuery } from './queries/get-list-of-cars.query';
 
-class CarDetailsDto {}
 class RemoveCarQueryDto {
   id: string;
 }
@@ -24,10 +24,11 @@ export class FleetController {
   @ApiResponse({
     status: 200,
     description: 'Returns list of cars',
-    type: Array<CarDetailsDto>,
+    type: CarDetailsDto,
+    isArray: true,
   })
   @ApiResponse({ status: 500, description: 'Internal server error' })
-  async getListOfCars(): Promise<unknown> {
+  async getListOfCars(): Promise<CarDetailsDto[]> {
     return this.queryBus.execute(new GetListOfCarsQuery());
   }
 
@@ -35,10 +36,11 @@ export class FleetController {
   @ApiResponse({
     status: 200,
     description: 'Returns list of cars brands',
-    // type:
+    type: String,
+    isArray: true,
   })
   @ApiResponse({ status: 500, description: 'Internal server error' })
-  async getListOfCarsManufacturers(): Promise<unknown> {
+  async getListOfCarsManufacturers(): Promise<string[]> {
     return this.queryBus.execute(new GetListOfCarsManufacturersQuery());
   }
 
@@ -57,7 +59,9 @@ export class FleetController {
   async addOrEditCarDetails(
     @Body() dto: CarDetailsDto,
   ): Promise<CarDetailsDto> {
-    return this.commandBus.execute(new PutCarDetailsCommand());
+    return this.commandBus.execute(new PutCarDetailsCommand(
+      dto.manufacturer, dto.license, dto.vin, dto.id
+    ));
   }
 
   @Delete()

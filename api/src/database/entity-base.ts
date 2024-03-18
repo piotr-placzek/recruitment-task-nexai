@@ -5,7 +5,7 @@ export class EntityBase {
     id: string;
 
     @CreateDateColumn({name: 'created_at'})
-    cratedAt: Date;
+    createdAt: Date;
 
     @UpdateDateColumn({name: 'updated_at'})
     updatedAt: Date;
