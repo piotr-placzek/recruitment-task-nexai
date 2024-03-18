@@ -4,6 +4,9 @@ import { CustomerEntity } from 'src/database/customer.entity';
 import { CustomerDetailsDto } from 'src/shared/dtos/customer-details.dto';
 import { Repository } from 'typeorm';
 import { GetCustomerDetailsQuery } from '../get-customer-details.query';
+import { HttpErrorByCode } from '@nestjs/common/utils/http-error-by-code.util';
+import { HttpException, HttpStatus } from '@nestjs/common';
+import { toCustomerDetailsDto } from 'src/shared/factories/customer-details-dto.factory';
 
 @QueryHandler(GetCustomerDetailsQuery)
 export class GetCustomerDetailsQueryHandler
@@ -15,8 +18,14 @@ export class GetCustomerDetailsQueryHandler
   ) {}
 
   async execute(query: GetCustomerDetailsQuery): Promise<CustomerDetailsDto> {
-    return this.customerRepository.findOneOrFail({
+    const customer = await this.customerRepository.findOne({
       where: { id: query.customerId },
     });
+
+    if (!customer) {
+      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+    }
+
+    return toCustomerDetailsDto(customer);
   }
 }

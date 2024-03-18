@@ -22,6 +22,11 @@ export class CUstomersController {
     description: 'Validation error',
     type: RequestValidationError,
   })
+  @ApiResponse({
+    status: 404,
+    description: 'Not found',
+    type: String,
+  })
   @ApiResponse({ status: 500, description: 'Internal server error' })
   async getCustomerDetailsById(
     @Query('dto') dto: GetCustomerDetailsQueryDto,
