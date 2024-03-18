@@ -3,7 +3,7 @@ import { QueryBus } from '@nestjs/cqrs';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerDetailsDto } from 'src/shared/dtos/customer-details.dto';
 import { RequestValidationError } from 'src/shared/dtos/request-validation-error.dto';
-import { GetCustomerDetailsQueryDto } from './queries/dtos/get-customer-details-dto.dto';
+import { GetCustomerDetailsQueryDto } from '../../shared/dtos/get-customer-details-dto.dto';
 import { GetCustomerDetailsQuery } from './queries/get-customer-details.query';
 
 @Controller('customers')

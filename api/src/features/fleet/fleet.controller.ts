@@ -4,7 +4,7 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RequestValidationError } from 'src/shared/dtos/request-validation-error.dto';
 import { PutCarDetailsCommand } from './commands/put-car-details.command';
 import { RemoveCarFromFleetCommand } from './commands/remove-car-from-fleet.command';
-import { CarDetailsDto } from './queries/dtos/car-details.dto';
+import { CarDetailsDto } from '../../shared/dtos/car-details.dto';
 import { GetListOfCarsManufacturersQuery } from './queries/get-list-of-cars-manufacturers.query';
 import { GetListOfCarsQuery } from './queries/get-list-of-cars.query';
 
@@ -59,9 +59,9 @@ export class FleetController {
   async addOrEditCarDetails(
     @Body() dto: CarDetailsDto,
   ): Promise<CarDetailsDto> {
-    return this.commandBus.execute(new PutCarDetailsCommand(
-      dto.manufacturer, dto.license, dto.vin, dto.id
-    ));
+    return this.commandBus.execute(
+      new PutCarDetailsCommand(dto.manufacturer, dto.license, dto.vin, dto.id),
+    );
   }
 
   @Delete()

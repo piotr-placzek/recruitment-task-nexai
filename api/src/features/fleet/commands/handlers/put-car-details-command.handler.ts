@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CarEntity } from 'src/database/car.entity';
 import { toCarDetailsDto } from 'src/shared/factories/car-details-dto.factory';
 import { Repository } from 'typeorm';
-import { CarDetailsDto } from '../../queries/dtos/car-details.dto';
+import { CarDetailsDto } from '../../../../shared/dtos/car-details.dto';
 import { PutCarDetailsCommand } from '../put-car-details.command';
 
 @CommandHandler(PutCarDetailsCommand)
