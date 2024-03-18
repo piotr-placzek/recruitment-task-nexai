@@ -2,7 +2,7 @@ import { execSync } from 'child_process';
 
 const generationsSource = 'src/openapi.yaml';
 const generationTarget = 'dist/openapi';
-const frontAppSource = '../app/src/';
+const frontAppSource = '..';
 
 try {
   execSync(`rm -rf ${generationTarget}`);
