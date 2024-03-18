@@ -6,8 +6,8 @@ import { RequestValidationError } from 'src/shared/dtos/request-validation-error
 import { GetCarPositionQueryDto } from './queries/dtos/get-car-position-query.dto';
 import { GetCarPositionQuery } from './queries/get-car-position.query';
 
-@ApiTags('tracking')
 @Controller('tracking')
+@ApiTags('tracking')
 export class TrackingController {
   constructor(private readonly queryBus: QueryBus) {}
 
