@@ -1,6 +1,6 @@
-import { EntityBase } from 'src/database/entity-base';
-import { CustomerEntity } from 'src/database/customer.entity';
-import { TrackingPositionEntity } from 'src/database/tracking-position.entity';
+import { EntityBase } from 'src/database/entities/entity-base';
+import { CustomerEntity } from 'src/database/entities/customer.entity';
+import { TrackingPositionEntity } from 'src/database/entities/tracking-position.entity';
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 
 @Entity('fleet')

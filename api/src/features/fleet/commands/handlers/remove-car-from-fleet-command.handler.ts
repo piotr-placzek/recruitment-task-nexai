@@ -1,6 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CarEntity } from 'src/database/car.entity';
+import { CarEntity } from 'src/database/entities/car.entity';
 import { Repository } from 'typeorm';
 import { RemoveCarFromFleetCommand } from '../remove-car-from-fleet.command';
 

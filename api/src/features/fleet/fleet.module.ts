@@ -6,7 +6,7 @@ import { FleetController } from './fleet.controller';
 import { GetListOfCarsManufacturersQueryHandler } from './queries/handlers/get-list-of-cars-manufacturers-query.handler';
 import { GetListOfCarsQueryHandler } from './queries/handlers/get-list-of-cars-query.handler';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CarEntity } from 'src/database/car.entity';
+import { CarEntity } from 'src/database/entities/car.entity';
 
 const queryHandlers = [
   GetListOfCarsQueryHandler,

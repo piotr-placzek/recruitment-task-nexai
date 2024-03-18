@@ -1,4 +1,4 @@
-import { TrackingPositionEntity } from 'src/database/tracking-position.entity';
+import { TrackingPositionEntity } from 'src/database/entities/tracking-position.entity';
 import { CarPositionDto } from '../dtos/car-position.dto';
 
 export function toCarPositionDto(

@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CustomerEntity } from 'src/database/customer.entity';
+import { CustomerEntity } from 'src/database/entities/customer.entity';
 import { CustomerDetailsDto } from 'src/shared/dtos/customer-details.dto';
 import { Repository } from 'typeorm';
 import { GetCustomerDetailsQuery } from '../get-customer-details.query';

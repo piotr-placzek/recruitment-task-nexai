@@ -1,4 +1,4 @@
-import { EntityBase } from 'src/database/entity-base';
+import { EntityBase } from 'src/database/entities/entity-base';
 import { AddressDto } from 'src/shared/dtos/address.dto';
 import { Column, Entity } from 'typeorm';
 

@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CarEntity } from 'src/database/car.entity';
+import { CarEntity } from 'src/database/entities/car.entity';
 import { toCarDetailsDto } from 'src/shared/factories/car-details-dto.factory';
 import { Repository } from 'typeorm';
 import { CarDetailsDto } from '../../../../shared/dtos/car-details.dto';

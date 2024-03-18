@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TrackingPositionEntity } from 'src/database/tracking-position.entity';
+import { TrackingPositionEntity } from 'src/database/entities/tracking-position.entity';
 import { CarPositionDto } from 'src/shared/dtos/car-position.dto';
 import { toCarPositionDto } from 'src/shared/factories/car-position-dto.factory';
 import { Repository } from 'typeorm';

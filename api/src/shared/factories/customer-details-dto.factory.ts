@@ -1,4 +1,4 @@
-import { CustomerEntity } from 'src/database/customer.entity';
+import { CustomerEntity } from 'src/database/entities/customer.entity';
 import { CustomerDetailsDto } from '../dtos/customer-details.dto';
 
 export function toCustomerDetailsDto(

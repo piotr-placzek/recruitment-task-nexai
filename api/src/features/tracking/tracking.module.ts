@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CoreModule } from 'src/core/core.module';
-import { TrackingPositionEntity } from 'src/database/tracking-position.entity';
+import { TrackingPositionEntity } from 'src/database/entities/tracking-position.entity';
 import { GetCarPositionQueryHandler } from './queries/handlers/get-car-position-query.handler';
 import { TrackingController } from './tracking.controller';
 
