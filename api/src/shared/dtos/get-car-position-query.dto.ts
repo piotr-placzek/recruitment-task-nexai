@@ -6,6 +6,6 @@ export class GetCarPositionQueryDto {
     type: 'string',
     format: 'uuid',
   })
-  // @IsUUID()
+  @IsUUID()
   id: string;
 }

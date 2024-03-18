@@ -29,7 +29,7 @@ export class CUstomersController {
   })
   @ApiResponse({ status: 500, description: 'Internal server error' })
   async getCustomerDetailsById(
-    @Query('dto') dto: GetCustomerDetailsQueryDto,
+    @Query() dto: GetCustomerDetailsQueryDto,
   ): Promise<CustomerDetailsDto> {
     return this.queryBus.execute(new GetCustomerDetailsQuery(dto.id));
   }

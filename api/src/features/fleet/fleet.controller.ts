@@ -76,7 +76,7 @@ export class FleetController {
   })
   @ApiResponse({ status: 500, description: 'Internal server error' })
   async removeCarFromFleet(
-    @Query('dto') dto: RemoveCarQueryDto,
+    @Query() dto: RemoveCarQueryDto,
   ): Promise<void> {
     return this.commandBus.execute(new RemoveCarFromFleetCommand(dto.id));
   }

@@ -24,7 +24,7 @@ export class TrackingController {
   })
   @ApiResponse({ status: 500, description: 'Internal server error' })
   async getCarPosition(
-    @Query('dto') dto: GetCarPositionQueryDto,
+    @Query() dto: GetCarPositionQueryDto,
   ): Promise<CarPositionDto> {
     return this.queryBus.execute(new GetCarPositionQuery(dto.id));
   }

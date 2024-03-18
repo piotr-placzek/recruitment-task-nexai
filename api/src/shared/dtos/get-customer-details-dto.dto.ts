@@ -6,6 +6,6 @@ export class GetCustomerDetailsQueryDto {
     type: 'string',
     format: 'uuid',
   })
-  // @IsUUID()
+  @IsUUID()
   id: string;
 }
