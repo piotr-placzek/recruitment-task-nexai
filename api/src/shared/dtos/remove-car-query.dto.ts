@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsUUID } from 'class-validator';
 
-export class GetCarPositionQueryDto {
+export class RemoveCarQueryDto {
   @ApiProperty({
     format: 'uuid',
   })

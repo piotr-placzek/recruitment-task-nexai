@@ -4,13 +4,10 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RequestValidationError } from 'src/shared/dtos/request-validation-error.dto';
 import { PutCarDetailsCommand } from './commands/put-car-details.command';
 import { RemoveCarFromFleetCommand } from './commands/remove-car-from-fleet.command';
-import { CarDetailsDto } from '../../shared/dtos/car-details.dto';
+import { CarDetailsDto, PutCarDetailsDto } from '../../shared/dtos/car-details.dto';
 import { GetListOfCarsManufacturersQuery } from './queries/get-list-of-cars-manufacturers.query';
 import { GetListOfCarsQuery } from './queries/get-list-of-cars.query';
-
-class RemoveCarQueryDto {
-  id: string;
-}
+import { RemoveCarQueryDto } from 'src/shared/dtos/remove-car-query.dto';
 
 @Controller('fleet')
 @ApiTags('fleet')
@@ -57,7 +54,7 @@ export class FleetController {
   })
   @ApiResponse({ status: 500, description: 'Internal server error' })
   async addOrEditCarDetails(
-    @Body() dto: CarDetailsDto,
+    @Body() dto: PutCarDetailsDto,
   ): Promise<CarDetailsDto> {
     return this.commandBus.execute(
       new PutCarDetailsCommand(dto.manufacturer, dto.license, dto.vin, dto.id),
@@ -75,9 +72,7 @@ export class FleetController {
     type: RequestValidationError,
   })
   @ApiResponse({ status: 500, description: 'Internal server error' })
-  async removeCarFromFleet(
-    @Query() dto: RemoveCarQueryDto,
-  ): Promise<void> {
+  async removeCarFromFleet(@Query() dto: RemoveCarQueryDto): Promise<void> {
     return this.commandBus.execute(new RemoveCarFromFleetCommand(dto.id));
   }
 }

@@ -3,7 +3,6 @@ import { AddressDto } from './address.dto';
 
 export class CarPositionDto {
   @ApiProperty({
-    type: 'string',
     format: 'uuid'
   })
   carId: string;

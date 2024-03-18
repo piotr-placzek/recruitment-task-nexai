@@ -3,15 +3,11 @@ import { IsNumber, IsPostalCode, IsString, Min } from 'class-validator';
 
 export class AddressDto {
   @ApiProperty()
-  @IsString()
   streetName: string;
 
   @ApiProperty()
-  @IsNumber()
-  @Min(1)
-  streetNumber: number;
+  buildingNumber: string;
 
   @ApiProperty()
-  @IsPostalCode()
   zipCode: string;
 }
