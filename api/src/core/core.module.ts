@@ -24,4 +24,4 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   ],
   exports: [CqrsModule],
 })
-export default class CoreModule {}
+export class CoreModule {}
