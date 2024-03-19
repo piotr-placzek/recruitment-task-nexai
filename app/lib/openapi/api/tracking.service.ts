@@ -22,6 +22,8 @@ import { Observable }                                        from 'rxjs';
 import { CarPositionDto } from '../model/carPositionDto';
 // @ts-ignore
 import { RequestValidationError } from '../model/requestValidationError';
+// @ts-ignore
+import { Uuid } from '../model/uuid';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -98,18 +100,12 @@ export class TrackingService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public trackingControllerGetCarPosition(id: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<CarPositionDto>;
-    public trackingControllerGetCarPosition(id: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CarPositionDto>>;
-    public trackingControllerGetCarPosition(id: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CarPositionDto>>;
-    public trackingControllerGetCarPosition(id: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public trackingControllerGetCarPosition(id: Uuid, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<CarPositionDto>;
+    public trackingControllerGetCarPosition(id: Uuid, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CarPositionDto>>;
+    public trackingControllerGetCarPosition(id: Uuid, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CarPositionDto>>;
+    public trackingControllerGetCarPosition(id: Uuid, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling trackingControllerGetCarPosition.');
-        }
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (id !== undefined && id !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>id, 'id');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -152,7 +148,6 @@ export class TrackingService {
         return this.httpClient.request<CarPositionDto>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

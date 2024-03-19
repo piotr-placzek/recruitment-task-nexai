@@ -1,9 +1,8 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CustomerDetailsDto } from 'src/shared/dtos/customer-details.dto';
 import { RequestValidationError } from 'src/shared/dtos/request-validation-error.dto';
-import { GetCustomerDetailsQueryDto } from '../../shared/dtos/get-customer-details-query.dto';
 import { GetCustomerDetailsQuery } from './queries/get-customer-details.query';
 
 @Controller('customers')
@@ -12,6 +11,7 @@ export class CUstomersController {
   constructor(private readonly queryBus: QueryBus) {}
 
   @Get('details')
+  @ApiParam({ name: 'id', type: 'uuid' })
   @ApiResponse({
     status: 200,
     description: 'Details for selected customer',
@@ -29,8 +29,8 @@ export class CUstomersController {
   })
   @ApiResponse({ status: 500, description: 'Internal server error' })
   async getCustomerDetailsById(
-    @Query() dto: GetCustomerDetailsQueryDto,
+    @Param() id: string,
   ): Promise<CustomerDetailsDto> {
-    return this.queryBus.execute(new GetCustomerDetailsQuery(dto.id));
+    return this.queryBus.execute(new GetCustomerDetailsQuery(id));
   }
 }

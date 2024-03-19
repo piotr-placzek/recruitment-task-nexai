@@ -1,15 +1,6 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Put,
-  Query,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Put } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { RemoveCarQueryDto } from 'src/shared/dtos/remove-car-query.dto';
 import { RequestValidationError } from 'src/shared/dtos/request-validation-error.dto';
 import {
   CarDetailsDto,
@@ -17,9 +8,9 @@ import {
 } from '../../shared/dtos/car-details.dto';
 import { PutCarDetailsCommand } from './commands/put-car-details.command';
 import { RemoveCarFromFleetCommand } from './commands/remove-car-from-fleet.command';
+import { GetCarDetailsQuery } from './queries/get-car-details.query';
 import { GetListOfCarsManufacturersQuery } from './queries/get-list-of-cars-manufacturers.query';
 import { GetListOfCarsQuery } from './queries/get-list-of-cars.query';
-import { GetCarDetailsQuery } from './queries/get-car-details.query';
 
 @Controller('fleet')
 @ApiTags('fleet')
@@ -85,7 +76,8 @@ export class FleetController {
     );
   }
 
-  @Delete()
+  @Delete(':id')
+  @ApiParam({ name: 'id', type: 'uuid' })
   @ApiResponse({
     status: 200,
     description: 'Remove selected car from fleet',
@@ -96,7 +88,7 @@ export class FleetController {
     type: RequestValidationError,
   })
   @ApiResponse({ status: 500, description: 'Internal server error' })
-  async removeCarFromFleet(@Query() dto: RemoveCarQueryDto): Promise<void> {
-    return this.commandBus.execute(new RemoveCarFromFleetCommand(dto.id));
+  async removeCarFromFleet(@Param('id') id: string): Promise<void> {
+    return this.commandBus.execute(new RemoveCarFromFleetCommand(id));
   }
 }

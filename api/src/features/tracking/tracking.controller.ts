@@ -1,9 +1,8 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CarPositionDto } from 'src/shared/dtos/car-position.dto';
 import { RequestValidationError } from 'src/shared/dtos/request-validation-error.dto';
-import { GetCarPositionQueryDto } from '../../shared/dtos/get-car-position-query.dto';
 import { GetCarPositionQuery } from './queries/get-car-position.query';
 
 @Controller('tracking')
@@ -12,6 +11,7 @@ export class TrackingController {
   constructor(private readonly queryBus: QueryBus) {}
 
   @Get()
+  @ApiParam({ name: 'id', type: 'uuid' })
   @ApiResponse({
     status: 200,
     description: 'Current address, where selected car is',
@@ -23,9 +23,7 @@ export class TrackingController {
     type: RequestValidationError,
   })
   @ApiResponse({ status: 500, description: 'Internal server error' })
-  async getCarPosition(
-    @Query() dto: GetCarPositionQueryDto,
-  ): Promise<CarPositionDto> {
-    return this.queryBus.execute(new GetCarPositionQuery(dto.id));
+  async getCarPosition(@Param() id: string): Promise<CarPositionDto> {
+    return this.queryBus.execute(new GetCarPositionQuery(id));
   }
 }

@@ -11,9 +11,10 @@
  */
 
 
-export interface AddressDto { 
-    streetName: string;
-    buildingNumber: string;
-    zipCode: string;
+export interface PutCarDetailsDto { 
+    id?: string;
+    manufacturer: string;
+    license: string;
+    vin: string;
 }
 

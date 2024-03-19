@@ -22,6 +22,8 @@ import { Observable }                                        from 'rxjs';
 import { CustomerDetailsDto } from '../model/customerDetailsDto';
 // @ts-ignore
 import { RequestValidationError } from '../model/requestValidationError';
+// @ts-ignore
+import { Uuid } from '../model/uuid';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -98,18 +100,12 @@ export class CustomersService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public cUstomersControllerGetCustomerDetailsById(id: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<CustomerDetailsDto>;
-    public cUstomersControllerGetCustomerDetailsById(id: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CustomerDetailsDto>>;
-    public cUstomersControllerGetCustomerDetailsById(id: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CustomerDetailsDto>>;
-    public cUstomersControllerGetCustomerDetailsById(id: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public cUstomersControllerGetCustomerDetailsById(id: Uuid, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<CustomerDetailsDto>;
+    public cUstomersControllerGetCustomerDetailsById(id: Uuid, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CustomerDetailsDto>>;
+    public cUstomersControllerGetCustomerDetailsById(id: Uuid, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CustomerDetailsDto>>;
+    public cUstomersControllerGetCustomerDetailsById(id: Uuid, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling cUstomersControllerGetCustomerDetailsById.');
-        }
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (id !== undefined && id !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>id, 'id');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -152,7 +148,6 @@ export class CustomersService {
         return this.httpClient.request<CustomerDetailsDto>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

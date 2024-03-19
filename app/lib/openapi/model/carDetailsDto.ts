@@ -14,12 +14,11 @@ import { CustomerDetailsDto } from './customerDetailsDto';
 
 
 export interface CarDetailsDto { 
-    id: string;
+    id?: string;
     manufacturer: string;
     license: string;
     vin: string;
-    rented: boolean;
-    customer: CustomerDetailsDto;
+    rentedBy: CustomerDetailsDto;
     position: CarPositionDto;
 }
 

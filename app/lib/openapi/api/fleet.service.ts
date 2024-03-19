@@ -21,7 +21,11 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { CarDetailsDto } from '../model/carDetailsDto';
 // @ts-ignore
+import { PutCarDetailsDto } from '../model/putCarDetailsDto';
+// @ts-ignore
 import { RequestValidationError } from '../model/requestValidationError';
+// @ts-ignore
+import { Uuid } from '../model/uuid';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -94,16 +98,16 @@ export class FleetService {
     }
 
     /**
-     * @param carDetailsDto 
+     * @param putCarDetailsDto 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public fleetControllerAddOrEditCarDetails(carDetailsDto: CarDetailsDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<CarDetailsDto>;
-    public fleetControllerAddOrEditCarDetails(carDetailsDto: CarDetailsDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CarDetailsDto>>;
-    public fleetControllerAddOrEditCarDetails(carDetailsDto: CarDetailsDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CarDetailsDto>>;
-    public fleetControllerAddOrEditCarDetails(carDetailsDto: CarDetailsDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        if (carDetailsDto === null || carDetailsDto === undefined) {
-            throw new Error('Required parameter carDetailsDto was null or undefined when calling fleetControllerAddOrEditCarDetails.');
+    public fleetControllerAddOrEditCarDetails(putCarDetailsDto: PutCarDetailsDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<CarDetailsDto>;
+    public fleetControllerAddOrEditCarDetails(putCarDetailsDto: PutCarDetailsDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CarDetailsDto>>;
+    public fleetControllerAddOrEditCarDetails(putCarDetailsDto: PutCarDetailsDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CarDetailsDto>>;
+    public fleetControllerAddOrEditCarDetails(putCarDetailsDto: PutCarDetailsDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        if (putCarDetailsDto === null || putCarDetailsDto === undefined) {
+            throw new Error('Required parameter putCarDetailsDto was null or undefined when calling fleetControllerAddOrEditCarDetails.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -155,7 +159,70 @@ export class FleetService {
         return this.httpClient.request<CarDetailsDto>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: carDetailsDto,
+                body: putCarDetailsDto,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                transferCache: localVarTransferCache,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param id 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public fleetControllerGetCarDetails(id: Uuid, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<CarDetailsDto>;
+    public fleetControllerGetCarDetails(id: Uuid, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<CarDetailsDto>>;
+    public fleetControllerGetCarDetails(id: Uuid, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<CarDetailsDto>>;
+    public fleetControllerGetCarDetails(id: Uuid, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling fleetControllerGetCarDetails.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+        let localVarTransferCache: boolean | undefined = options && options.transferCache;
+        if (localVarTransferCache === undefined) {
+            localVarTransferCache = true;
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/fleet/details/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "Uuid", dataFormat: undefined})}`;
+        return this.httpClient.request<CarDetailsDto>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -285,13 +352,17 @@ export class FleetService {
     }
 
     /**
+     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public fleetControllerRemoveCarFromFleet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public fleetControllerRemoveCarFromFleet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public fleetControllerRemoveCarFromFleet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public fleetControllerRemoveCarFromFleet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public fleetControllerRemoveCarFromFleet(id: Uuid, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public fleetControllerRemoveCarFromFleet(id: Uuid, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public fleetControllerRemoveCarFromFleet(id: Uuid, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public fleetControllerRemoveCarFromFleet(id: Uuid, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling fleetControllerRemoveCarFromFleet.');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -329,7 +400,7 @@ export class FleetService {
             }
         }
 
-        let localVarPath = `/fleet`;
+        let localVarPath = `/fleet/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "Uuid", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

@@ -10,7 +10,14 @@
     "license": "license",
     "rented": "rented",
     "rented-by": "rented by",
-    "current-position": "current position"
+    "current-position": "current position",
+    "form": {
+      "validation": {
+        "invalid-manufacturer": "required: alphanumeric value, dashes allowed",
+        "invalid-license": "required: alphanumeric value, dashes allowed",
+        "invalid-vin": "required: alphanumeric value, 17 chars length"
+      }
+    }
   },
   "common": {
     "yes": "yes",

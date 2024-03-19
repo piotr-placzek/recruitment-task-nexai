@@ -67,6 +67,6 @@ export class ApiService {
   }
 
   removeCar(id: string): Observable<unknown> {
-    return this.http.delete(this.BASE_URL + 'fleet', { params: { id } });
+    return this.http.delete(this.BASE_URL + `fleet/${id}`);
   }
 }

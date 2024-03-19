@@ -16,7 +16,7 @@ paths:
       parameters: []
       responses:
         '200':
-          description: Always returns 'OK' string
+          description: Always returns 'OK' status
   /fleet:
     get:
       operationId: FleetController_getListOfCars
@@ -42,9 +42,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CarDetailsDto'
+              $ref: '#/components/schemas/PutCarDetailsDto'
       responses:
-        '201':
+        '200':
           description: Add or edit car details, returns these details
           content:
             application/json:
@@ -60,18 +60,22 @@ paths:
           description: Internal server error
       tags:
         - fleet
-    delete:
-      operationId: FleetController_removeCarFromFleet
-      parameters: []
+  /fleet/details/{id}:
+    get:
+      operationId: FleetController_getCarDetails
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: uuid
       responses:
         '200':
-          description: Remove selected car from fleet
-        '400':
-          description: Validation error
+          description: Returns car details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RequestValidationError'
+                $ref: '#/components/schemas/CarDetailsDto'
         '500':
           description: Internal server error
       tags:
@@ -93,16 +97,37 @@ paths:
           description: Internal server error
       tags:
         - fleet
+  /fleet/{id}:
+    delete:
+      operationId: FleetController_removeCarFromFleet
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: uuid
+      responses:
+        '200':
+          description: Remove selected car from fleet
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestValidationError'
+        '500':
+          description: Internal server error
+      tags:
+        - fleet
   /customers/details:
     get:
       operationId: CUstomersController_getCustomerDetailsById
       parameters:
         - name: id
           required: true
-          in: query
+          in: path
           schema:
-            format: uuid
-            type: string
+            type: uuid
       responses:
         '200':
           description: Details for selected customer
@@ -132,10 +157,9 @@ paths:
       parameters:
         - name: id
           required: true
-          in: query
+          in: path
           schema:
-            format: uuid
-            type: string
+            type: uuid
       responses:
         '200':
           description: Current address, where selected car is
@@ -161,13 +185,13 @@ components:
       properties:
         streetName:
           type: string
-        streetNumber:
-          type: number
+        buildingNumber:
+          type: string
         zipCode:
           type: string
       required:
         - streetName
-        - streetNumber
+        - buildingNumber
         - zipCode
     CustomerDetailsDto:
       type: object
@@ -179,8 +203,6 @@ components:
           type: string
         lastName:
           type: string
-        companyName:
-          type: string
         email:
           type: string
           format: email
@@ -189,7 +211,6 @@ components:
       required:
         - firstName
         - lastName
-        - companyName
         - email
         - address
     CarPositionDto:
@@ -219,20 +240,32 @@ components:
           type: string
         vin:
           type: string
-        rented:
-          type: boolean
-        customer:
+        rentedBy:
           $ref: '#/components/schemas/CustomerDetailsDto'
         position:
           $ref: '#/components/schemas/CarPositionDto'
       required:
-        - id
         - manufacturer
         - license
         - vin
-        - rented
-        - customer
+        - rentedBy
         - position
+    PutCarDetailsDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        manufacturer:
+          type: string
+        license:
+          type: string
+        vin:
+          type: string
+      required:
+        - manufacturer
+        - license
+        - vin
     RequestValidationError:
       type: object
       properties:
