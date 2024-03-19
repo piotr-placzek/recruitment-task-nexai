@@ -16,6 +16,7 @@
     "yes": "yes",
     "no": "no",
     "add": "add",
+    "edit": "edit",
     "remove": "remove",
     "cancel": "cancel",
     "confirm": "confirm"

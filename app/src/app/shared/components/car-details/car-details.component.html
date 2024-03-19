@@ -1,9 +1,16 @@
 <div class="flex-col gap-2 border border-blue-400 rounded p-2">
-  <app-button
-    additionalClasses="!bg-red-600 text-white !hover:bg-red-500"
-    text="{{ 'common.remove' | translate }}"
-    (click)="removeClicked.emit(carDetails.id)"
-  ></app-button>
+  <div class="flex justify-center">
+    <app-button
+      additionalClasses="bg-orange-600 text-white hover:bg-orange-500"
+      text="{{ 'common.edit' | translate }}"
+      (click)="editClicked.emit(carDetails.id)"
+    ></app-button>
+    <app-button
+      additionalClasses="bg-red-600 text-white hover:bg-red-500"
+      text="{{ 'common.remove' | translate }}"
+      (click)="removeClicked.emit(carDetails.id)"
+    ></app-button>
+  </div>
   <div>
     <p>
       {{ "car-details.manufacturer" | translate }}:

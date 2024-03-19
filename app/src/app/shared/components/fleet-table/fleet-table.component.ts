@@ -8,4 +8,5 @@ import { CarDetails } from 'src/app/core/api.service';
 export class FleetTableComponent {
   @Input() fleet!: CarDetails[];
   @Output() removeCarClicked = new EventEmitter<string>();
+  @Output() editCarClicked = new EventEmitter<string>();
 }

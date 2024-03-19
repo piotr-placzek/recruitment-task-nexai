@@ -8,4 +8,5 @@ import { CarDetails } from 'src/app/core/api.service';
 export class CarDetailsComponent {
   @Input() carDetails!: CarDetails;
   @Output() removeClicked = new EventEmitter<string>();
+  @Output() editClicked = new EventEmitter<string>();
 }

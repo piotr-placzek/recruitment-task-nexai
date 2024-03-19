@@ -10,21 +10,22 @@
   <app-fleet-table
     [fleet]="fleet"
     (removeCarClicked)="onRemoveCarClicked($event)"
+    (editCarClicked)="onEditCarClicked($event)"
   ></app-fleet-table>
-  
+
   <app-confirmation-dialog
     [open]="confirmation.removeCar.open"
     (cancel)="confirmation.removeCar.open = false"
     (confirm)="handleRemoveCarConfirmation()"
-    title="{{'fleet.removeCarConfirmation.title' | translate}}"
-    content="{{'fleet.removeCarConfirmation.message' | translate }}"
+    title="{{ 'fleet.removeCarConfirmation.title' | translate }}"
+    content="{{ 'fleet.removeCarConfirmation.message' | translate }}"
   ></app-confirmation-dialog>
 
   <app-confirmation-dialog
     [open]="confirmation.retryGetFleet.open"
     (cancel)="confirmation.retryGetFleet.open = false"
     (confirm)="handleRetryLoadFleetConfirmation()"
-    title="{{'other.confirmation.tryAgainLoadFleet.title' | translate}}"
-    content="{{'other.confirmation.tryAgainLoadFleet.message' | translate}}"
+    title="{{ 'other.confirmation.tryAgainLoadFleet.title' | translate }}"
+    content="{{ 'other.confirmation.tryAgainLoadFleet.message' | translate }}"
   ></app-confirmation-dialog>
 </div>

@@ -4,5 +4,6 @@
     *ngFor="let car of fleet"
     [carDetails]="car"
     (removeClicked)="removeCarClicked.emit($event)"
+    (editClicked)="editCarClicked.emit($event)"
   ></app-car-details>
 </div>
