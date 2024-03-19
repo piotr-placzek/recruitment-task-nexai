@@ -1,0 +1,30 @@
+<div class="flex-col gap-2 border border-blue-400 rounded p-2">
+  <div>
+    <p>
+      {{ "car-details.manufacturer" | translate }}:
+      <span class="font-medium">{{ "bentley" }}</span>
+    </p>
+    <p>
+      {{ "car-details.license" | translate }}:
+      <span class="font-medium">{{ "bentley" }}</span>
+    </p>
+    <p>
+      {{ "car-details.vin" | translate }}:
+      <span class="font-medium">{{ "bentley" }}</span>
+    </p>
+    <p>
+      {{ "car-details.rented" | translate }}:
+      <span class="font-medium">{{
+        (true ? "common.yes" : "common.no") | translate
+      }}</span>
+    </p>
+  </div>
+  <div *ngIf="true">
+    <p>{{ "car-details.rented-by" | translate }}</p>
+    <app-address-preview class="border rounded border-slate-400 p-1"></app-address-preview>
+  </div>
+  <div>
+    <p>{{ "car-details.current-position" | translate }}</p>
+    <app-address-preview class="border rounded border-slate-400 p-1"></app-address-preview>
+  </div>
+</div>

@@ -1,22 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { TestService } from './test.service';
-import { DefaultService } from 'lib/openapi';
-
+import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+// import { DefaultService } from 'typescript-angular-nexai-rt-api-client'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  constructor(private readonly ts: TestService,
-  // private readonly apiGateway: DefaultService
-  ) { }
-  
-  title = 'nexai-rt';
-
-  async ngOnInit() {
-    console.log('init')
-    console.log(await this.ts.healtz());
+export class AppComponent {
+  constructor(private translate: TranslateService) {
+    translate.setDefaultLang('en');
+    translate.use('en');
   }
+
+  title = 'nexai-rt';
 }

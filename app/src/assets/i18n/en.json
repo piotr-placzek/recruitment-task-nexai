@@ -1,0 +1,22 @@
+{
+  "address": {
+    "street-name": "street-name",
+    "building-number": "building-number",
+    "zip-code": "zip-code"
+  },
+  "car-details": {
+    "manufacturer": "manufacturer",
+    "vin": "vin",
+    "license": "license",
+    "rented": "rented",
+    "rented-by": "rented by",
+    "current-position": "current position"
+  },
+  "common": {
+    "yes": "yes",
+    "no": "no"
+  },
+  "navigation": {
+    "list-of-cars": "list of cars"
+  }
+}

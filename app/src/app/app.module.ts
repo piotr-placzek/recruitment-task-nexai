@@ -1,23 +1,40 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { HttpClientModule } from '@angular/common/http';
-import { ApiModule } from 'typescript-angular-nexai-rt-api-client';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+// import { ApiModule } from 'typescript-angular-nexai-rt-api-client';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { SharedModule } from './shared/shared.module';
 import { TestService } from './test.service';
+import { FleetPreviewComponent } from './views/fleet-preview/fleet-preview.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NavbarComponent, FleetPreviewComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CoreModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
+    CoreModule,
+    SharedModule,
     // ApiModule,
   ],
   providers: [TestService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
