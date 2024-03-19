@@ -9,11 +9,14 @@ export interface Address {
   zipCode: string;
 }
 
-export interface CarDetails {
+export interface PutCarDetails {
   id?: string;
   manufacturer: string;
   license: string;
   vin: string;
+}
+
+export interface CarDetails extends PutCarDetails {
   rentedBy: CustomerDetails | null;
   position: Tracking;
 }
@@ -52,7 +55,11 @@ export class ApiService {
     return this.http.get<Required<CarDetails>[]>(this.BASE_URL + 'fleet');
   }
 
-  putCar(carDetails: CarDetails): Observable<Required<CarDetails>> {
+  getCarDetails(id: string): Observable<Required<CarDetails>> {
+    return this.http.get<Required<CarDetails>>(this.BASE_URL + `fleet/details/${id}`);
+  }
+
+  putCar(carDetails: PutCarDetails): Observable<Required<CarDetails>> {
     return this.http.put<Required<CarDetails>>(
       this.BASE_URL + 'fleet',
       carDetails

@@ -3,7 +3,6 @@ import { join } from 'path';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
 config();
-console.log(__dirname)
 export const dbDataSource: DataSourceOptions = {
   type: 'mysql',
   host: process.env.MYSQL_HOST,

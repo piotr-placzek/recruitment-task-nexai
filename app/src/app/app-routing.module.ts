@@ -8,17 +8,10 @@ const routes: Routes = [
     component: FleetPreviewComponent,
   },
   {
-    path: 'add-car',
+    path: 'car/details',
     loadChildren: () =>
-      import('./views/car-edit-view/car-edit-view.module').then(
-        (m) => m.CarEditViewModule
-      ),
-  },
-  {
-    path: 'edit-car/:id',
-    loadChildren: () =>
-      import('./views/car-edit-view/car-edit-view.module').then(
-        (m) => m.CarEditViewModule
+      import('./views/car-details/car-details-view.module').then(
+        (m) => m.CarDetailsViewModule
       ),
   },
 ];

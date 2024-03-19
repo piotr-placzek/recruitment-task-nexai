@@ -10,8 +10,8 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
-import { CarEditViewModule } from './views/car-edit-view/car-edit-view.module';
 import { FleetPreviewComponent } from './views/fleet-preview/fleet-preview.component';
+import { CarDetailsViewModule } from './views/car-details/car-details-view.module';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, FleetPreviewComponent],
@@ -29,7 +29,7 @@ import { FleetPreviewComponent } from './views/fleet-preview/fleet-preview.compo
     CoreModule,
     SharedModule,
     ApiModule,
-    CarEditViewModule,
+    CarDetailsViewModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

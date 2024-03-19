@@ -1,6 +1,14 @@
-import { Body, Controller, Delete, Get, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RemoveCarQueryDto } from 'src/shared/dtos/remove-car-query.dto';
 import { RequestValidationError } from 'src/shared/dtos/request-validation-error.dto';
 import {
@@ -11,6 +19,7 @@ import { PutCarDetailsCommand } from './commands/put-car-details.command';
 import { RemoveCarFromFleetCommand } from './commands/remove-car-from-fleet.command';
 import { GetListOfCarsManufacturersQuery } from './queries/get-list-of-cars-manufacturers.query';
 import { GetListOfCarsQuery } from './queries/get-list-of-cars.query';
+import { GetCarDetailsQuery } from './queries/get-car-details.query';
 
 @Controller('fleet')
 @ApiTags('fleet')
@@ -30,6 +39,18 @@ export class FleetController {
   @ApiResponse({ status: 500, description: 'Internal server error' })
   async getListOfCars(): Promise<CarDetailsDto[]> {
     return this.queryBus.execute(new GetListOfCarsQuery());
+  }
+
+  @Get('details/:id')
+  @ApiParam({ name: 'id', type: 'uuid' })
+  @ApiResponse({
+    status: 200,
+    description: 'Returns car details',
+    type: CarDetailsDto,
+  })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
+  async getCarDetails(@Param('id') id: string): Promise<CarDetailsDto> {
+    return this.queryBus.execute(new GetCarDetailsQuery(id));
   }
 
   @Get('manufacturers')
