@@ -5,12 +5,26 @@ import { FleetPreviewComponent } from './views/fleet-preview/fleet-preview.compo
 const routes: Routes = [
   {
     path: '',
-    component: FleetPreviewComponent
-  }
+    component: FleetPreviewComponent,
+  },
+  {
+    path: 'add-car',
+    loadChildren: () =>
+      import('./views/car-edit-view/car-edit-view.module').then(
+        (m) => m.CarEditViewModule
+      ),
+  },
+  {
+    path: 'edit-car/:id',
+    loadChildren: () =>
+      import('./views/car-edit-view/car-edit-view.module').then(
+        (m) => m.CarEditViewModule
+      ),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -41,11 +41,11 @@ export class FleetPreviewComponent implements OnInit, OnDestroy {
   }
 
   onAddCarClicked(): void {
-    this.router.navigate(['car-edit']);
+    this.router.navigate(['add-car']);
   }
 
   onEditCarClicked(id: string): void {
-    this.router.navigate(['car-edit', id]);
+    this.router.navigate(['edit-car', id]);
   }
 
   onRemoveCarClicked(id: string): void {
