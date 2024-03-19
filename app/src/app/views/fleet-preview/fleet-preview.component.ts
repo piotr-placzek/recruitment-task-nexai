@@ -41,7 +41,7 @@ export class FleetPreviewComponent implements OnInit, OnDestroy {
   }
 
   onAddCarClicked(): void {
-    this.router.navigate(['car','details','add']);
+    this.router.navigate(['car', 'details', 'add']);
   }
 
   onEditCarClicked(id: string): void {
@@ -60,6 +60,7 @@ export class FleetPreviewComponent implements OnInit, OnDestroy {
       //TODO sth smarter than logging it into console
       console.log(error);
     } finally {
+      this.loadFleetBs.next(null);
       this.confirmation.removeCar.open = false;
     }
   }
