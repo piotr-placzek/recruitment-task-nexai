@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import axios, { AxiosInstance } from 'axios';
+import { Observable } from 'rxjs';
 import { environment } from '../evironments/environment';
 
 export interface Address {
@@ -13,7 +14,8 @@ export interface CarDetails {
   manufacturer: string;
   license: string;
   vin: string;
-  rentedBy: string | null;
+  rentedBy: CustomerDetails | null;
+  position: Tracking;
 }
 
 export interface Manufacturer {
@@ -38,73 +40,26 @@ export interface CustomerDetails {
   providedIn: 'root',
 })
 export class ApiService {
-  private axiosClient: AxiosInstance;
+  private BASE_URL = `http://${window.location.host}${environment.apiUrl}/`;
 
-  constructor() {
-    this.axiosClient = axios.create({
-      baseURL: `http://${window.location.host}${environment.apiUrl}/`,
-    });
+  constructor(private readonly http: HttpClient) {}
+
+  health(): Observable<string> {
+    return this.http.get<string>(this.BASE_URL + 'health');
   }
 
-  async health(): Promise<string> {
-    return this.axiosClient
-      .get('health')
-      .then((r) => r.data)
-      .catch((e) => Promise.reject(this.errorHandler(e)));
+  getFleet(): Observable<Required<CarDetails>[]> {
+    return this.http.get<Required<CarDetails>[]>(this.BASE_URL + 'fleet');
   }
 
-  async getManufacturers(): Promise<Manufacturer[]> {
-    return this.axiosClient
-      .get('fleet/manufacturers')
-      .then((r) => r.data)
-      .then((d) => d.json())
-      .catch((e) => Promise.reject(this.errorHandler(e)));
+  putCar(carDetails: CarDetails): Observable<Required<CarDetails>> {
+    return this.http.put<Required<CarDetails>>(
+      this.BASE_URL + 'fleet',
+      carDetails
+    );
   }
 
-  async getFleet(): Promise<Required<CarDetails>[]> {
-    return this.axiosClient
-      .get('fleet')
-      .then((r) => r.data)
-      .then((d) => d.json())
-      .catch((e) => Promise.reject(this.errorHandler(e)));
-  }
-
-  async putCar(carDetails: CarDetails): Promise<Required<CarDetails>> {
-    return this.axiosClient
-      .put('fleet', carDetails)
-      .then((r) => r.data)
-      .then((d) => d.json())
-      .catch((e) => Promise.reject(this.errorHandler(e)));
-  }
-
-  async removeCar(id: string): Promise<void> {
-    return this.axiosClient
-      .delete('fleet', { params: { id } })
-      .then((r) => r.data)
-      .then((d) => d.json())
-      .catch((e) => Promise.reject(this.errorHandler(e)));
-  }
-
-  async getCustomerDetails(id: string): Promise<CustomerDetails> {
-    return this.axiosClient
-      .delete('customers/details', { params: { id } })
-      .then((r) => r.data)
-      .then((d) => d.json())
-      .catch((e) => Promise.reject(this.errorHandler(e)));
-  }
-
-  async getCarPosition(id: string): Promise<Tracking> {
-    return this.axiosClient
-      .delete('tracking', { params: { id } })
-      .then((r) => r.data)
-      .then((d) => d.json())
-      .catch((e) => Promise.reject(this.errorHandler(e)));
-  }
-
-  private errorHandler(error: any) {
-    return {
-      code: error.code || -1,
-      message: error.message || 'Unknown error',
-    };
+  removeCar(id: string): Observable<unknown> {
+    return this.http.delete(this.BASE_URL + 'fleet', { params: { id } });
   }
 }

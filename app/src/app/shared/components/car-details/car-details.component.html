@@ -20,7 +20,7 @@
       <p>{{ "car-details.current-position" | translate }}</p>
       <app-address-preview
         class="border rounded border-slate-400 p-1"
-        [address]="carDetails.currentPosition"
+        [address]="carDetails.position.address"
       ></app-address-preview>
       <p>
         {{ "car-details.rented" | translate }}:
@@ -30,16 +30,16 @@
       </p>
     </div>
   </div>
-  <div *ngIf="carDetails.customerDetails">
+  <div *ngIf="carDetails.rentedBy">
     <p>{{ "car-details.rented-by" | translate }}</p>
     <p>
-      {{ carDetails.customerDetails.firstName }}
-      {{ carDetails.customerDetails.firstName }}
-      {{ carDetails.customerDetails.email }}
+      {{ carDetails.rentedBy.firstName }}
+      {{ carDetails.rentedBy.firstName }}
+      {{ carDetails.rentedBy.email }}
     </p>
     <app-address-preview
       class="border rounded border-slate-400 p-1"
-      [address]="carDetails.customerDetails.address"
+      [address]="carDetails.rentedBy.address"
     ></app-address-preview>
   </div>
 </div>

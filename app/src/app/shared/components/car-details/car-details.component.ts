@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ExtendedCarDetails } from '../../interfaces/extended-car-details.interface';
+import { CarDetails } from 'src/app/core/api.service';
 
 @Component({
   selector: 'app-car-details',
   templateUrl: './car-details.component.html',
 })
 export class CarDetailsComponent {
-  @Input() carDetails!: ExtendedCarDetails;
+  @Input() carDetails!: CarDetails;
   @Output() removeClicked = new EventEmitter<string>();
 }

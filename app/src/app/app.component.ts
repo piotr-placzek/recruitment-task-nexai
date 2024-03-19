@@ -25,9 +25,6 @@ export class AppComponent implements OnInit {
     // const apiHealth = await lastValueFrom(this.api.appControllerHealth());
     // This is my first attempt to use openapi generated client
     // Unfortunately it provides some errors and I need to create own service for this recruitment task
-    this.api
-      .health()
-      .then((status: string) => console.log('API HEALTH:', status))
-      .catch(() => console.log('API DOES NOT RESPOND'));
+    console.log('API:', await lastValueFrom(this.api.health()));
   }
 }

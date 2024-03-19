@@ -1,62 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/core/api.service';
-import { ExtendedCarDetails } from 'src/app/shared/interfaces/extended-car-details.interface';
+import { Subscription } from 'rxjs';
+import { ApiService, CarDetails } from 'src/app/core/api.service';
 
 @Component({
   templateUrl: './fleet-preview.component.html',
 })
-export class FleetPreviewComponent implements OnInit {
-    constructor(private readonly api: ApiService, private readonly router: Router) { }
-    
-  public fleet: ExtendedCarDetails[] = [
-    {
-      id: 'id',
-      manufacturer: 'm',
-      license: 'l',
-      vin: 'v',
-      rentedBy: 'r',
-      currentPosition: {
-        streetName: 'sn',
-        buildingNumber: 'bn',
-        zipCode: 'zc',
-      },
-      customerDetails: {
-        id: '',
-        firstName: 'fn',
-        lastName: 'ln',
-        email: 'em',
-        address: {
-          streetName: 'sn',
-          buildingNumber: 'bn',
-          zipCode: 'zc',
-        },
-      },
-    },
-    {
-      id: 'id2',
-      manufacturer: 'm',
-      license: 'l',
-      vin: 'v',
-      rentedBy: null,
-      currentPosition: {
-        streetName: 'sn',
-        buildingNumber: 'bn',
-        zipCode: 'zc',
-      },
-    },
-  ];
+export class FleetPreviewComponent implements OnInit, OnDestroy {
+  public fleet: CarDetails[] = [];
+
+  private subscriptions = new Subscription();
+
+  constructor(
+    private readonly api: ApiService,
+    private readonly router: Router
+  ) {}
 
   async ngOnInit(): Promise<void> {
-    try {
-    } catch (error) {}
+    this.subscriptions.add(
+      this.api.getFleet().subscribe((data) => this.fleetHandler(data))
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   onAddClick() {
-      this.router.navigate(['car-edit']);
+    this.router.navigate(['car-edit']);
   }
 
   onRemoveCar(id: string) {
     console.log(id);
+  }
+
+  private fleetHandler(fleet: Required<CarDetails[]>): void {
+    this.fleet = fleet;
   }
 }

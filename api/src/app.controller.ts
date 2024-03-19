@@ -6,8 +6,8 @@ export class AppController {
   constructor() {}
 
   @Get('health')
-  @ApiResponse({ status: 200, description: "Always returns 'OK' string" })
-  health(): string {
-    return 'OK';
+  @ApiResponse({ status: 200, description: "Always returns 'OK' status" })
+  health(): { status: 'OK' } {
+    return { status: 'OK' };
   }
 }
