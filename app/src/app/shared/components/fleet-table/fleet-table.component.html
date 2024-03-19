@@ -1,0 +1,9 @@
+<div class="flex overflow-y-auto p-2">
+  <app-car-details
+    class="m-2"
+    *ngFor="let car of fleet"
+    [carDetails]="car"
+    (removeClicked)="removeCarClicked.emit($event)"
+    (editClicked)="editCarClicked.emit($event)"
+  ></app-car-details>
+</div>

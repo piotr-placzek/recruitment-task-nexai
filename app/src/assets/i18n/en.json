@@ -1,0 +1,48 @@
+{
+  "address": {
+    "street-name": "street-name",
+    "building-number": "building-number",
+    "zip-code": "zip-code"
+  },
+  "car-details": {
+    "manufacturer": "manufacturer",
+    "vin": "vin",
+    "license": "license",
+    "rented": "rented",
+    "rented-by": "rented by",
+    "current-position": "current position",
+    "form": {
+      "validation": {
+        "invalid-manufacturer": "required: alphanumeric value, dashes allowed",
+        "invalid-license": "required: alphanumeric value, dashes allowed",
+        "invalid-vin": "required: alphanumeric value, 17 chars length"
+      }
+    }
+  },
+  "common": {
+    "yes": "yes",
+    "no": "no",
+    "add": "add",
+    "edit": "edit",
+    "remove": "remove",
+    "cancel": "cancel",
+    "confirm": "confirm"
+  },
+  "fleet": {
+    "removeCarConfirmation": {
+      "title": "confirm remove car",
+      "message": "do you want to remove this car?"
+    }
+  },
+  "navigation": {
+    "list-of-cars": "list of cars"
+  },
+  "other": {
+    "confirmation": {
+      "tryAgainLoadFleet": {
+        "title": "can't load fleet",
+        "message": "do you want to try again?"
+      }
+    }
+  }
+}

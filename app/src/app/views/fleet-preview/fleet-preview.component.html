@@ -1,0 +1,31 @@
+<div class="relative">
+  <div class="flex gap-4">
+    <p>Fleet preview</p>
+    <app-button
+      additionalClasses="bg-green-600 text-white hover:bg-green-500"
+      text="{{ 'common.add' | translate }}"
+      (click)="onAddCarClicked()"
+    ></app-button>
+  </div>
+  <app-fleet-table
+    [fleet]="fleet"
+    (removeCarClicked)="onRemoveCarClicked($event)"
+    (editCarClicked)="onEditCarClicked($event)"
+  ></app-fleet-table>
+
+  <app-confirmation-dialog
+    [open]="confirmation.removeCar.open"
+    (cancel)="confirmation.removeCar.open = false"
+    (confirm)="handleRemoveCarConfirmation()"
+    title="{{ 'fleet.removeCarConfirmation.title' | translate }}"
+    content="{{ 'fleet.removeCarConfirmation.message' | translate }}"
+  ></app-confirmation-dialog>
+
+  <app-confirmation-dialog
+    [open]="confirmation.retryGetFleet.open"
+    (cancel)="confirmation.retryGetFleet.open = false"
+    (confirm)="handleRetryLoadFleetConfirmation()"
+    title="{{ 'other.confirmation.tryAgainLoadFleet.title' | translate }}"
+    content="{{ 'other.confirmation.tryAgainLoadFleet.message' | translate }}"
+  ></app-confirmation-dialog>
+</div>
