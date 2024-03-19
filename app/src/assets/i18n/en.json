@@ -14,7 +14,9 @@
   },
   "common": {
     "yes": "yes",
-    "no": "no"
+    "no": "no",
+    "add": "add",
+    "remove": "remove"
   },
   "navigation": {
     "list-of-cars": "list of cars"

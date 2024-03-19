@@ -13,7 +13,7 @@ export interface CarDetails {
   manufacturer: string;
   license: string;
   vin: string;
-  rentedBy: string;
+  rentedBy: string | null;
 }
 
 export interface Manufacturer {

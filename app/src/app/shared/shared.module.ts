@@ -4,8 +4,14 @@ import { CarDetailsComponent } from './components/car-details/car-details.compon
 import { FleetTableComponent } from './components/fleet-table/fleet-table.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AddressPreviewComponent } from './components/address-preview/address-preview.component';
+import { ButtonComponent } from './components/button/button.component';
 
-const SharedComponents = [FleetTableComponent, CarDetailsComponent, AddressPreviewComponent];
+const SharedComponents = [
+  FleetTableComponent,
+  CarDetailsComponent,
+  AddressPreviewComponent,
+  ButtonComponent,
+];
 
 @NgModule({
   imports: [CommonModule, TranslateModule],

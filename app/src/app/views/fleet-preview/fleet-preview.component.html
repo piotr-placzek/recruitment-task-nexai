@@ -1,4 +1,13 @@
 <div>
-    <h2>Fleet preview</h2>
-    <app-fleet-table></app-fleet-table>
+  <div class="flex gap-4">
+    <p>Fleet preview</p>
+    <app-button
+      text="{{ 'common.add' | translate }}"
+      (click)="onAddClick()"
+    ></app-button>
+  </div>
+  <app-fleet-table
+    [fleet]="fleet"
+    (removeCarClicked)="onRemoveCar($event)"
+  ></app-fleet-table>
 </div>
