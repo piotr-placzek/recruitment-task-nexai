@@ -1,8 +1,14 @@
 import { AddressDto } from 'src/shared/dtos/address.dto';
-import { Column, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  PrimaryColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('tracking')
-export class TrackingPositionEntity {
+export class TrackingPositionEntity extends BaseEntity {
   @PrimaryColumn({ type: 'uuid' })
   id: string;
 

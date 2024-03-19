@@ -16,7 +16,12 @@ export class GetListOfCarsQueryHandler
   ) {}
 
   async execute(): Promise<CarDetailsDto[]> {
-    const fleet = await this.fleetRepository.find();
+    const fleet = await this.fleetRepository.find({
+      relations: {
+        rentedBy: true,
+        position: true,
+      },
+    });
     return fleet.map(toCarDetailsDto);
   }
 }

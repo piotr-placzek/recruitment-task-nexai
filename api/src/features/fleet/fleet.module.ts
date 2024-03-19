@@ -7,6 +7,7 @@ import { RemoveCarFromFleetCommandHandler } from './commands/handlers/remove-car
 import { FleetController } from './fleet.controller';
 import { GetListOfCarsManufacturersQueryHandler } from './queries/handlers/get-list-of-cars-manufacturers-query.handler';
 import { GetListOfCarsQueryHandler } from './queries/handlers/get-list-of-cars-query.handler';
+import { TrackingPositionEntity } from 'src/database/entities/tracking-position.entity';
 
 const queryHandlers = [
   GetListOfCarsQueryHandler,
@@ -18,7 +19,7 @@ const commandHandlers = [
 ];
 
 @Module({
-  imports: [CoreModule, TypeOrmModule.forFeature([CarEntity])],
+  imports: [CoreModule, TypeOrmModule.forFeature([CarEntity, TrackingPositionEntity])],
   controllers: [FleetController],
   providers: [...queryHandlers, ...commandHandlers],
 })
