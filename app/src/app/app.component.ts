@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TestService } from './test.service';
+import { DefaultService } from 'lib/openapi';
+
 
 @Component({
   selector: 'app-root',
@@ -7,7 +9,9 @@ import { TestService } from './test.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private readonly ts: TestService) { }
+  constructor(private readonly ts: TestService,
+  // private readonly apiGateway: DefaultService
+  ) { }
   
   title = 'nexai-rt';
 
