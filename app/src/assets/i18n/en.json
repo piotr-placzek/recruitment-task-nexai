@@ -16,9 +16,25 @@
     "yes": "yes",
     "no": "no",
     "add": "add",
-    "remove": "remove"
+    "remove": "remove",
+    "cancel": "cancel",
+    "confirm": "confirm"
+  },
+  "fleet": {
+    "removeCarConfirmation": {
+      "title": "confirm remove car",
+      "message": "do you want to remove this car?"
+    }
   },
   "navigation": {
     "list-of-cars": "list of cars"
+  },
+  "other": {
+    "confirmation": {
+      "tryAgainLoadFleet": {
+        "title": "can't load fleet",
+        "message": "do you want to try again?"
+      }
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, lastValueFrom } from 'rxjs';
 import { ApiService, CarDetails } from 'src/app/core/api.service';
 
 @Component({
@@ -10,6 +10,18 @@ export class FleetPreviewComponent implements OnInit, OnDestroy {
   public fleet: CarDetails[] = [];
 
   private subscriptions = new Subscription();
+  private loadFleetBs = new BehaviorSubject(null);
+  private loadFleetBs$ = this.loadFleetBs.asObservable();
+
+  confirmation = {
+    removeCar: {
+      open: false,
+      carId: '',
+    },
+    retryGetFleet: {
+      open: false,
+    },
+  };
 
   constructor(
     private readonly api: ApiService,
@@ -18,7 +30,9 @@ export class FleetPreviewComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<void> {
     this.subscriptions.add(
-      this.api.getFleet().subscribe((data) => this.fleetHandler(data))
+      this.loadFleetBs$.subscribe(() => {
+        this.loadFleet();
+      })
     );
   }
 
@@ -26,15 +40,36 @@ export class FleetPreviewComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  onAddClick() {
+  onAddCarClicked(): void {
     this.router.navigate(['car-edit']);
   }
 
-  onRemoveCar(id: string) {
-    console.log(id);
+  onRemoveCarClicked(id: string): void {
+    this.confirmation.removeCar.carId = id;
+    this.confirmation.removeCar.open = true;
   }
 
-  private fleetHandler(fleet: Required<CarDetails[]>): void {
-    this.fleet = fleet;
+  handleRemoveCarConfirmation(): void {
+    try {
+      lastValueFrom(this.api.removeCar(this.confirmation.removeCar.carId));
+    } catch (error) {
+      //TODO sth smarter than logging it into console
+      console.log(error);
+    } finally {
+      this.confirmation.removeCar.open = false;
+    }
+  }
+
+  handleRetryLoadFleetConfirmation(): void {
+    this.loadFleetBs.next(null);
+    this.confirmation.retryGetFleet.open = false;
+  }
+
+  private async loadFleet(): Promise<void> {
+    try {
+      this.fleet = await lastValueFrom(this.api.getFleet());
+    } catch (error) {
+      this.confirmation.retryGetFleet.open = true;
+    }
   }
 }

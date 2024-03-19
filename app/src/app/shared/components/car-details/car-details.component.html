@@ -1,5 +1,6 @@
 <div class="flex-col gap-2 border border-blue-400 rounded p-2">
   <app-button
+    additionalClasses="!bg-red-600 text-white !hover:bg-red-500"
     text="{{ 'common.remove' | translate }}"
     (click)="removeClicked.emit(carDetails.id)"
   ></app-button>
@@ -34,7 +35,7 @@
     <p>{{ "car-details.rented-by" | translate }}</p>
     <p>
       {{ carDetails.rentedBy.firstName }}
-      {{ carDetails.rentedBy.firstName }}
+      {{ carDetails.rentedBy.lastName }}
       {{ carDetails.rentedBy.email }}
     </p>
     <app-address-preview
